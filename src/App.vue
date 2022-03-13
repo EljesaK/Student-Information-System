@@ -1,13 +1,28 @@
 <template>
+<div class="bg-body ">
   <div id="app">
+    <app-header/>
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Students</router-link> |
+      <router-link to="/about">About</router-link> |
+    <router-link to="/help">Help</router-link>
+    <router-link to="/login">Log In</router-link>
     </nav>
     <router-view/>
   </div>
+</div>
 </template>
 
+<script>
+import AppHeader from '@/components/AppHeader.vue'
+
+export default {
+  components: {
+    AppHeader
+  }
+}
+</script>
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -29,4 +44,9 @@ nav {
     }
   }
 }
+
+#table td{
+  padding: 5px;
+}
+
 </style>
