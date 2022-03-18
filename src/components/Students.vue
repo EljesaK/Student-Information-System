@@ -8,9 +8,6 @@
         <th>Municipality</th>
         <th>Action</th>
       </tr>
-      <tr v-bind:key="student.id" v-for="student in students">
-
-      </tr>
       <tr v-bind:key="student.id"  v-for="student in students">
         <td>{{ student.id }}</td>
         <td>{{student.name}}</td>
@@ -20,24 +17,44 @@
           <button  class="edit btn">
             <i class="fas fa-pen text-warning"></i>
           </button>
-          <button class="delete btn">
+          <button class="delete btn" v-b-modal.modal-2 @click="sendInfo(student)">
             <i class="fas fa-trash text-danger" ></i>
           </button>
+
         </td>
       </tr>
-
+      <b-modal id="modal-2" title="Delete student" class="modal-dialog modal-dialog-centered">
+        <DeleteStudent v-bind:student="selectedUser" v-on:del-student-item="delStudentMethod"/>
+      </b-modal>
     </table>
 
   </div>
 </template>
 
 <script>
+import DeleteStudent from "@/components/DeleteStudent";
+
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Students",
   props: ["students"],
   components: {
-
+    DeleteStudent
+  },
+  data : function() {
+return {
+    selectedUser :'',
+  };
+},
+  methods:{
+    delStudentMethod(id){
+      //send to parent
+      this.$emit('del-student-event', id);
+    },
+    sendInfo(item) {
+      this.selectedUser= item;
+    }
   }
 }
 </script>

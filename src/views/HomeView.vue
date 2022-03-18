@@ -11,16 +11,13 @@
 
         <div class="col-3">
           <b-button v-b-modal.modal-1>Add new</b-button>
-
           <b-modal id="modal-1" title="Add new student" class="modal-dialog modal-dialog-centered">
             <AddStudent v-on:add-student-event="addStudent"/>
           </b-modal>
         </div>
-
       </div>
-
       <div class="m-3 mt-0 p-4 rounded-bottom bg-light ">
-        <Students v-bind:students="students" />
+        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" />
       </div>
   </div></div>
 </template>
@@ -84,6 +81,9 @@ export default {
       console.warn("added new student");
       this.students = [...this.students, newStudent]
     },
+    deleteStudentItem(id){
+      this.students = this.students.filter(student => student.id !== id);
+    }
   },
 
   watch: {
@@ -102,17 +102,10 @@ export default {
 }
 import Students from "../components/Students";
 import AddStudent from "../components/AddStudent";
-
-
-
 </script>
 <style>
 #table td{
   padding: 5px;
 }
 </style>
-<!--<script>-->
-<!--$(document).ready(function(){-->
-<!--  $('[data-toggle="tooltip"]').tooltip();-->
-<!--});-->
-<!--</script>-->
+
