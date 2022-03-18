@@ -3,15 +3,24 @@
 <!--    <img alt="Vue logo" src="../assets/logo.png">-->
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <div class="p-5 pt-0">
-      <div action="" class="row justify-content-between align-content-between m-3 p-4 mb-0 bg-primary rounded-top">
+      <div class="row justify-content-between align-content-between m-3 p-4 mb-0 bg-primary rounded-top">
         <form style="border: 1px solid black;" class="col-3 rounded-pill text-start bg-light text-muted p-1 ps-3">
           <i class="fas fa-search"></i>
           <input placeholder="search" class="bg-transparent border-0 ">
         </form>
-        <AddStudent  v-on:add-student-event="addStudent" />
+
+        <div class="col-3">
+          <b-button v-b-modal.modal-1>Add new</b-button>
+
+          <b-modal id="modal-1" title="Add new student" class="modal-dialog modal-dialog-centered">
+            <AddStudent v-on:add-student-event="addStudent"/>
+          </b-modal>
+        </div>
+
       </div>
+
       <div class="m-3 mt-0 p-4 rounded-bottom bg-light ">
-        <Students v-bind:students="students"/>
+        <Students v-bind:students="students" />
       </div>
   </div></div>
 </template>
@@ -36,33 +45,33 @@ export default {
     return {
       students: [
         {
-          id:1458,
+          id:1,
           name: "Mergim Bajrami",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },
         {
-          id:1452,
+          id:2,
           name: "Blerton Rexha",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },{
-          id:1461,
+          id:3,
           name: "Abdullah Krasniqi",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },{
-          id:1472,
+          id:4,
           name: "Sami Salihu",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },{
-          id:1491,
+          id:5,
           name: "Visar Uruqi",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },{
-          id:1232,
+          id:6,
           name: "Naim Krasniqi",
           dob:"1989-10-05",
           municipality:"Prishtine"
@@ -70,9 +79,13 @@ export default {
       ]
     }
   },
-  addBookItem(newStudent){
-    this.students = [...this.students, newStudent]
+  methods:{
+    addStudent(newStudent){
+      console.warn("added new student");
+      this.students = [...this.students, newStudent]
+    },
   },
+
   watch: {
     students: {
       handler() {
@@ -80,10 +93,17 @@ export default {
       },
       deep: true
     }
+  },
+  mounted() {
+    if (localStorage.getItem("students")){
+      this.students = JSON.parse(localStorage.getItem("students"))
+    }
   }
 }
 import Students from "../components/Students";
 import AddStudent from "../components/AddStudent";
+
+
 
 </script>
 <style>
