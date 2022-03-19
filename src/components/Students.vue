@@ -23,7 +23,7 @@
 
         </td>
       </tr>
-      <b-modal id="modal-2" title="Delete student" class="modal-dialog modal-dialog-centered">
+      <b-modal id="modal-2" title="Delete student" class="modal-dialog modal-dialog-centered" hide-footer>
         <DeleteStudent v-bind:student="selectedUser" v-on:del-student-item="delStudentMethod"/>
       </b-modal>
     </table>

@@ -11,7 +11,7 @@
 
         <div class="col-3">
           <b-button v-b-modal.modal-1>Add new</b-button>
-          <b-modal id="modal-1" title="Add new student" class="modal-dialog modal-dialog-centered">
+          <b-modal id="modal-1" title="Add new student" class="modal-dialog modal-dialog-centered" hide-footer>
             <AddStudent v-on:add-student-event="addStudent"/>
           </b-modal>
         </div>
