@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="m-3 mt-0 p-4 rounded-bottom bg-light ">
-        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" />
+        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" v-on:edit-student-event="editStudentItemEvent" v-model="editStudent" />
       </div>
   </div></div>
 </template>
@@ -73,7 +73,12 @@ export default {
           dob:"1989-10-05",
           municipality:"Prishtine"
         },
-      ]
+      ],
+      editStudent:{
+        name:'',
+        dob: '',
+        municipality: '',
+      }
     }
   },
   methods:{
@@ -83,6 +88,22 @@ export default {
     },
     deleteStudentItem(id){
       this.students = this.students.filter(student => student.id !== id);
+    },
+    editStudentItem(id){
+      //find the index of the book's id
+      var objIndex = this.students.findIndex(obj=> obj.id === id);
+      this.editStudent.name = this.students[objIndex].name;
+      this.editStudent.dob = this.students[objIndex].dob;
+      this.editStudent.municipality = this.students[objIndex].municipality;
+
+    },
+    editStudentItemEvent(studentItem){
+      //find the index of this id's object
+      let objIndex = this.students.findIndex(obj => obj.id === studentItem.id)
+      //update the item
+      this.students[objIndex].name = studentItem.title;
+      this.students[objIndex].dob = studentItem.dob;
+      this.students[objIndex].municipality = studentItem.municipality;
     }
   },
 

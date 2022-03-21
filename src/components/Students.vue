@@ -14,8 +14,8 @@
         <td>{{student.dob}}</td>
         <td>{{student.municipality}}</td>
         <td>
-          <button  class="edit btn">
-            <i class="fas fa-pen text-warning"></i>
+          <button  class="edit btn" v-b-modal.modal-3 @click="sendInfo(student)" >
+            <i class="fas fa-pen text-warning" ></i>
           </button>
           <button class="delete btn" v-b-modal.modal-2 @click="sendInfo(student)">
             <i class="fas fa-trash text-danger" ></i>
@@ -26,6 +26,9 @@
       <b-modal id="modal-2" title="Delete student" class="modal-dialog modal-dialog-centered" hide-footer>
         <DeleteStudent v-bind:student="selectedUser" v-on:del-student-item="delStudentMethod"/>
       </b-modal>
+      <b-modal id="modal-3" title="Edit student" class="modal-dialog modal-dialog-centered" hide-footer>
+        <EditStudent v-on:edit-student-item="editStudentMethod" v-model="editStudent"/>
+      </b-modal>
     </table>
 
   </div>
@@ -33,6 +36,7 @@
 
 <script>
 import DeleteStudent from "@/components/DeleteStudent";
+import EditStudent from "@/components/EditStudent";
 
 
 export default {
@@ -40,7 +44,8 @@ export default {
   name: "Students",
   props: ["students"],
   components: {
-    DeleteStudent
+    DeleteStudent,
+    EditStudent
   },
   data : function() {
 return {
@@ -51,6 +56,10 @@ return {
     delStudentMethod(id){
       //send to parent
       this.$emit('del-student-event', id);
+    },
+    editStudentMethod(studentItem){
+      //send to parent (App.vue)
+      this.$emit('edit-student-event', studentItem)
     },
     sendInfo(item) {
       this.selectedUser= item;
