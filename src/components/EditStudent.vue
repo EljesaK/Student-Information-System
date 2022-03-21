@@ -1,7 +1,7 @@
 <template>
   <div>
     <form  class="m-5 justify-content-left col" @submit="editStd">
-      <input type="text" name="id" v-model="editStudent.id" :placeholder="editStudent.id" class="m-3 p-2 form-control col">
+      <input type="text" name="id" v-model="id" :placeholder="editStudent.id" class="m-3 p-2 form-control col">
 
       <div class="row text-danger">
         <input type="text" name="name" v-model="name"  :placeholder="editStudent.name" class="mt-3 mb-3 p-2 form-control col">

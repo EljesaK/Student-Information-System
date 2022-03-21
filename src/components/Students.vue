@@ -14,7 +14,7 @@
         <td>{{student.dob}}</td>
         <td>{{student.municipality}}</td>
         <td>
-          <button  class="edit btn" v-b-modal.modal-3 @click="sendInfo(student)" >
+          <button  class="edit btn">
             <i class="fas fa-pen text-warning" ></i>
           </button>
           <button class="delete btn" v-b-modal.modal-2 @click="sendInfo(student)">
@@ -27,7 +27,7 @@
         <DeleteStudent v-bind:student="selectedUser" v-on:del-student-item="delStudentMethod"/>
       </b-modal>
       <b-modal id="modal-3" title="Edit student" class="modal-dialog modal-dialog-centered" hide-footer>
-        <EditStudent v-on:edit-student-item="editStudentMethod" v-model="editStudent"/>
+        <EditStudent />
       </b-modal>
     </table>
 
@@ -56,10 +56,6 @@ return {
     delStudentMethod(id){
       //send to parent
       this.$emit('del-student-event', id);
-    },
-    editStudentMethod(studentItem){
-      //send to parent (App.vue)
-      this.$emit('edit-student-event', studentItem)
     },
     sendInfo(item) {
       this.selectedUser= item;

@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="m-3 mt-0 p-4 rounded-bottom bg-light ">
-        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" v-on:edit-student-event="editStudentItemEvent" v-model="editStudent" />
+        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" />
       </div>
   </div></div>
 </template>
@@ -33,9 +33,7 @@
 export default {
   name: 'HomeView',
   components: {
-    // eslint-disable-next-line vue/no-unused-components
     Students,
-    // eslint-disable-next-line vue/no-unused-components
     AddStudent,
   },
   data () {
