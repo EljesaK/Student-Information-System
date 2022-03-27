@@ -9,12 +9,12 @@
         <th>Action</th>
       </tr>
       <tr v-bind:key="student.id"  v-for="student in students">
-        <td>{{ student.id }}</td>
+        <td>{{student.id}}</td>
         <td>{{student.name}}</td>
         <td>{{student.dob}}</td>
         <td>{{student.municipality}}</td>
         <td>
-          <button  class="edit btn">
+          <button  class="edit btn" v-b-modal.modal-3 @click="sendInfo(student)">
             <i class="fas fa-pen text-warning" ></i>
           </button>
           <button class="delete btn" v-b-modal.modal-2 @click="sendInfo(student)">
@@ -27,7 +27,7 @@
         <DeleteStudent v-bind:student="selectedUser" v-on:del-student-item="delStudentMethod"/>
       </b-modal>
       <b-modal id="modal-3" title="Edit student" class="modal-dialog modal-dialog-centered" hide-footer>
-        <EditStudent />
+        <EditStudent v-bind:editStudent="selectedUser" v-on:edit-student-item="editStudentMethod"/>
       </b-modal>
     </table>
 
@@ -59,6 +59,10 @@ return {
     },
     sendInfo(item) {
       this.selectedUser= item;
+    },
+    editStudentMethod(studentItem){
+      // //send to parent (HomeView.vue)
+      this.$emit('edit-student-event', studentItem)
     }
   }
 }

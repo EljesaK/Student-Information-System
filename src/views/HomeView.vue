@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="m-3 mt-0 p-4 rounded-bottom bg-light ">
-        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" />
+        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" v-on:edit-student-event="editStudentItemEvent" />
       </div>
   </div></div>
 </template>
@@ -40,33 +40,33 @@ export default {
     return {
       students: [
         {
-          id:1,
+          id:11,
           name: "Mergim Bajrami",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },
         {
-          id:2,
+          id:29,
           name: "Blerton Rexha",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },{
-          id:3,
+          id:13,
           name: "Abdullah Krasniqi",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },{
-          id:4,
+          id:42,
           name: "Sami Salihu",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },{
-          id:5,
+          id:27,
           name: "Visar Uruqi",
           dob:"1989-10-05",
           municipality:"Prishtine"
         },{
-          id:6,
+          id:20,
           name: "Naim Krasniqi",
           dob:"1989-10-05",
           municipality:"Prishtine"
@@ -97,11 +97,12 @@ export default {
     },
     editStudentItemEvent(studentItem){
       //find the index of this id's object
-      let objIndex = this.students.findIndex(obj => obj.id === studentItem.id)
-      //update the item
-      this.students[objIndex].name = studentItem.title;
+      let objIndex = this.students.findIndex(obj => obj.id === parseInt(studentItem.id))
+      // //update the item
+       this.students[objIndex].name = studentItem.name;
       this.students[objIndex].dob = studentItem.dob;
       this.students[objIndex].municipality = studentItem.municipality;
+      alert(studentItem.id+objIndex)
     }
   },
 
