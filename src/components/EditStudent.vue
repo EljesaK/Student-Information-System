@@ -8,7 +8,7 @@
         <input type="text" name="dob"  class="m-3 p-2 form-control col" ref="dob" :value="editStudent.dob">
       </div>
       <input type="text" name="municipality"  id="" ref="municipality"  class="form-control m-3 ms-0 me-5 p-2" :value="editStudent.municipality">
-      <button type="submit" class="d-block mt-3 ps-5 pe-5 btn btn-danger row form-control" @click="$bvModal.hide('modal-3'),show()">
+      <button type="submit" class="d-block mt-3 ps-5 pe-5 btn btn-danger row form-control" @click="$bvModal.hide('modal-3')">
         Save changes
       </button>
     </form>
@@ -24,19 +24,15 @@ export default {
       name:"",
       dob:"",
       municipality:"",
-      edit :false,
       id:""
     }
   },
   methods:{
-    // eslint-disable-next-line vue/no-dupe-keys
     editStd(){
-
       this.name=this.$refs.name.value;
       this.dob=this.$refs.dob.value;
       this.municipality=this.$refs.municipality.value;
       this.id=this.$refs.id.value;
-      alert(this.name+this.dob+this.municipality+this.id);
 
       const studentItem = {
         name: this.name,
@@ -46,16 +42,12 @@ export default {
       };
 
       this.$emit('edit-student-item', studentItem);
-      this.title='',
       this.dob='',
       this.municipality='',
       this.id='',
       this.edit=false
 
     },
-    show(){
-
-    }
 
   },
 

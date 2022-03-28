@@ -6,16 +6,16 @@
     <div v-if="logedIn">
       <header class="bg-light">
         <div class="row pt-4 pb-4 justify-content-between m-0">
-          <div class="col-5 ps-0">
+          <div class="col-5 ps-0 mt-4">
             <div class="row text-primary mb-0 ps-5 ms-5">
               <i class="fas fa-book-reader  fs-1 col-2 ms-5 mb-0"></i>
               <p class="fw-bold col-4 text-start mb-0">Student <br> Information System</p>
             </div>
           </div>
           <div class="col-2 me-5">
-            <div class="row">
-              <p class="text-dark font-weight-boldv fs-4 col mt-2">{{username}}</p>
-              <button v-on:click="logOut" class="btn btn-primary col">Log Out</button>
+            <div class="row p-3">
+              <p class="text-dark font-weight-boldv fs-5 ">{{username}}</p>
+              <button v-on:click="logOut" class="btn btn-primary ">Log Out</button>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default {
   },
   data: function () {
     return {
-      logedIn: true,
+      logedIn: false,
       username:""
     }
   },

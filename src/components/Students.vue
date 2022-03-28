@@ -2,10 +2,10 @@
   <div>
     <table class="table text-start" id="table">
       <tr>
-        <th>Index</th>
-        <th>Name </th>
+        <th>Index <button class="btn" @click="sortById"><i class="fas fa-sort" ></i></button></th>
+        <th>Name <button class="btn" @click="sortByName"><i class="fas fa-sort" ></i></button></th>
         <th>DoB</th>
-        <th>Municipality</th>
+        <th>Municipality <button class="btn" @click="sortByMunicipality"><i class="fas fa-sort" ></i></button></th>
         <th>Action</th>
       </tr>
       <tr v-bind:key="student.id"  v-for="student in students">
@@ -63,6 +63,15 @@ return {
     editStudentMethod(studentItem){
       // //send to parent (HomeView.vue)
       this.$emit('edit-student-event', studentItem)
+    },
+    sortById(){
+      this.$emit('sort-by-id')
+    },
+    sortByName(){
+      this.$emit("sort-by-name")
+    },
+    sortByMunicipality(){
+      this.$emit("sort-by-municipality")
     }
   }
 }

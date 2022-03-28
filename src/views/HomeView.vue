@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="m-3 mt-0 p-4 rounded-bottom bg-light ">
-        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" v-on:edit-student-event="editStudentItemEvent" />
+        <Students v-bind:students="students" v-on:del-student-event="deleteStudentItem" v-on:edit-student-event="editStudentItemEvent" v-on:sort-by-id="sortById" v-on:sort-by-name="sortByName" v-on:sort-by-municipality="sortByMunicipality"/>
       </div>
   </div></div>
 </template>
@@ -73,6 +73,7 @@ export default {
         },
       ],
       editStudent:{
+        id:'',
         name:'',
         dob: '',
         municipality: '',
@@ -87,22 +88,57 @@ export default {
     deleteStudentItem(id){
       this.students = this.students.filter(student => student.id !== id);
     },
-    editStudentItem(id){
-      //find the index of the book's id
-      var objIndex = this.students.findIndex(obj=> obj.id === id);
-      this.editStudent.name = this.students[objIndex].name;
-      this.editStudent.dob = this.students[objIndex].dob;
-      this.editStudent.municipality = this.students[objIndex].municipality;
-
-    },
+    // editStudentItem(id){
+    //   //find the index of the students's id
+    //   var objIndex = this.students.findIndex(obj=> obj.id === id);
+    //   this.editStudent.name = this.students[objIndex].name;
+    //   this.editStudent.dob = this.students[objIndex].dob;
+    //   this.editStudent.municipality = this.students[objIndex].municipality;
+    //
+    // },
     editStudentItemEvent(studentItem){
       //find the index of this id's object
       let objIndex = this.students.findIndex(obj => obj.id === parseInt(studentItem.id))
       // //update the item
        this.students[objIndex].name = studentItem.name;
+      this.students[objIndex].id = studentItem.id;
       this.students[objIndex].dob = studentItem.dob;
       this.students[objIndex].municipality = studentItem.municipality;
-      alert(studentItem.id+objIndex)
+    },
+    sortById(){
+      this.students.sort(function (a, b) {
+        return a.id - b.id;
+      });
+    },
+    sortByName(){
+      this.students.sort(function(a, b) {
+        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      });
+    },
+    sortByMunicipality(){
+      this.students.sort(function(a, b) {
+        const nameA = a.municipality.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.municipality.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      });
     }
   },
 
